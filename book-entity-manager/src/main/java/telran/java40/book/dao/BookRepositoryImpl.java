@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -32,17 +33,18 @@ public class BookRepositoryImpl implements BookRepository {
 	}
 
 
-
 	@Override
 	public Stream<Book> findByAuthorsName(String authorName) {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Book> query = em.createQuery("select distinct b from Book b join b.authors a where a.name=?1", Book.class);
+		query.setParameter(1,  authorName);
+		return query.getResultStream();
 	}
 
 	@Override
-	public Stream<Book> findByPublisherName(String publisherName) {
-		// TODO Auto-generated method stub
-		return null;
+	public Stream<Book> findByPublishersName(String publisherName) {
+		TypedQuery<Book> query = em.createQuery("select b from Book b where b.publisher.publisherName=?1", Book.class);
+		query.setParameter(1,  publisherName);
+		return query.getResultStream();
 	}
 
 	@Override

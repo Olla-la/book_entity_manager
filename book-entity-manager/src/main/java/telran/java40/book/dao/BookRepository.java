@@ -10,7 +10,7 @@ import telran.java40.book.model.Book;
 public interface BookRepository {
 	Stream<Book> findByAuthorsName(String authorName);
 
-	Stream<Book> findByPublisherName(String publisherName);
+	Stream<Book> findByPublishersName(String publisherName);
 	
 	Optional<Book> findById(Long isbn);
 	

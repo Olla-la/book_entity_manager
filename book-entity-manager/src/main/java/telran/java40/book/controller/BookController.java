@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import telran.java40.book.dto.AuthorDto;
 import telran.java40.book.dto.BookDto;
+import telran.java40.book.dto.PublisherDto;
+import telran.java40.book.model.Publisher;
 import telran.java40.book.service.BookService;
 
 @RestController
@@ -58,9 +60,15 @@ public class BookController {
 		return bookService.findBookAuthors(isbn);
 	}
 
+	/*
+	 * @GetMapping("/publishers/author/{author}") public Iterable<String>
+	 * findPublishersByAuthor(@PathVariable String author) { return
+	 * bookService.findPublishersByAuthor(author); }
+	 */
+	
 	@GetMapping("/publishers/author/{author}")
-	public Iterable<String> findPublishersByAuthor(@PathVariable String author) {
-		return bookService.findPublishersByAuthor(author);
+	public Iterable<PublisherDto> findPublishersByAuthor(@PathVariable String author) {
+		return bookService.findPublishersByAuthorName(author);
 	}
 
 	@DeleteMapping("/author/{author}")
